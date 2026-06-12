@@ -1,27 +1,32 @@
-name: Informacion del push
+name: Generar resumen del repositorio
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
-  informacion:
+  resumen:
     runs-on: ubuntu-latest
 
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
 
-      - name: Mostrar informacion
+      - name: Generar resumen
         run: |
-          echo "Se ha realizado un push al repositorio"
-          echo ""
-          echo "Fecha:"
-          date
-          echo ""
-          echo "Ultimo commit:"
-          git log -1 --oneline
-          echo ""
-          echo "Archivos del repositorio:"
-          ls
+          echo "# Resumen automatico del repositorio" > RESUMEN.md
+          echo "" >> RESUMEN.md
+          echo "Fecha de generacion:" >> RESUMEN.md
+          date >> RESUMEN.md
+          echo "" >> RESUMEN.md
+          echo "Ultimo commit:" >> RESUMEN.md
+          git log -1 --oneline >> RESUMEN.md
+          echo "" >> RESUMEN.md
+          echo "Archivos del repositorio:" >> RESUMEN.md
+          ls >> RESUMEN.md
+
+      - name: Mostrar resumen creado
+        run: |
+          cat RESUMEN.md
