@@ -1,4 +1,4 @@
-name: Generar resumen del repositorio
+name: Resumen de la práctica - actions
 
 on:
   push:
