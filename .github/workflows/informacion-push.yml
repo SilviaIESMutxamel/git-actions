@@ -1,0 +1,27 @@
+name: Informacion del push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  informacion:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Mostrar informacion
+        run: |
+          echo "Se ha realizado un push al repositorio"
+          echo ""
+          echo "Fecha:"
+          date
+          echo ""
+          echo "Ultimo commit:"
+          git log -1 --oneline
+          echo ""
+          echo "Archivos del repositorio:"
+          ls
